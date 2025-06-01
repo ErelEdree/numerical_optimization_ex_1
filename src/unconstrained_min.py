@@ -35,7 +35,7 @@ class UnconstrainedMin:
             if abs(f_new - f_values[-1]) < self.obj_tol or np.linalg.norm(x_new - x) < self.param_tol:
                 path.append(x_new.copy())
                 f_values.append(f_new)
-                print(f"method: gradient_descent, Iter {i}: x = {x_new}, f(x) = {f_new}, success = True")
+                print(f"function: {self.f.__name__}, method: gradient_descent, Iter {i}: x = {x_new}, f(x) = {f_new}, success = True")
                 return {
                     'x': x_new,
                     'success': True,
@@ -47,7 +47,7 @@ class UnconstrainedMin:
             x = x_new
             path.append(x.copy())
             f_values.append(f_new)
-        print(f"method: gradient_descent, Iter {self.max_iter}: x = {x}, f(x) = {f_values[-1]}, success = False")
+        print(f"function: {self.f.__name__}, method: gradient_descent, Iter {self.max_iter}: x = {x}, f(x) = {f_values[-1]}, success = False")
         return {
             'x': x,
             'success': False,
@@ -78,7 +78,7 @@ class UnconstrainedMin:
             if abs(f_new - f_values[-1]) < self.obj_tol or np.linalg.norm(x_new - x) < self.param_tol:
                 path.append(x_new.copy())
                 f_values.append(f_new)
-                print(f"method: newton_method, Iter {i}: x = {x_new}, f(x) = {f_new}, success = True")
+                print(f"function: {self.f.__name__}, method: newton_method, Iter {i}: x = {x_new}, f(x) = {f_new}, success = True")
                 return {
                     'x': x_new,
                     'success': True,
@@ -90,7 +90,7 @@ class UnconstrainedMin:
             x = x_new
             path.append(x.copy())
             f_values.append(f_new)
-        print(f"method: newton_method, Iter {self.max_iter}: x = {x}, f(x) = {f_values[-1]}, success = False")
+        print(f"function: {self.f.__name__}, method: newton_method, Iter {self.max_iter}: x = {x}, f(x) = {f_values[-1]}, success = False")
         return {
             'x': x,
             'success': False,
