@@ -30,11 +30,13 @@ class UnconstrainedMin:
             x_new = x + alpha * p
             f_new, grad, _ = self.f(x_new, is_hessian_needed=False)
 
-            # print(f"Iter {i}: x = {x_new}, f(x) = {f_new}")
+            #print each iteratin's x, f(x)
+            print(f"Iter {i}: x = {x_new}, f(x) = {f_new}")
             
             if abs(f_new - f_values[-1]) < self.obj_tol or np.linalg.norm(x_new - x) < self.param_tol:
                 path.append(x_new.copy())
                 f_values.append(f_new)
+                #print final value for report
                 print(f"function: {self.f.__name__}, method: gradient_descent, Iter {i}: x = {x_new}, f(x) = {f_new}, success = True")
                 return {
                     'x': x_new,
@@ -66,14 +68,14 @@ class UnconstrainedMin:
             try:
                 p = -np.linalg.solve(hess, grad)
             except np.linalg.LinAlgError:
-                # print(f"Iter {i}: Hessian is not invertible.")
+                print(f"Iter {i}: Hessian is not invertible.")
                 break
 
             alpha = self.backtracking_line_search(x, p, grad)
             x_new = x + alpha * p
             f_new, grad, hess = self.f(x_new, is_hessian_needed=True)
 
-            # print(f"Iter {i}: x = {x_new}, f(x) = {f_new}")
+            print(f"Iter {i}: x = {x_new}, f(x) = {f_new}")
 
             if abs(f_new - f_values[-1]) < self.obj_tol or np.linalg.norm(x_new - x) < self.param_tol:
                 path.append(x_new.copy())
@@ -86,7 +88,6 @@ class UnconstrainedMin:
                     'path': np.array(path),
                     'f_values': np.array(f_values)
                 }
-
             x = x_new
             path.append(x.copy())
             f_values.append(f_new)
